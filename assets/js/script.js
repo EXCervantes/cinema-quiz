@@ -39,14 +39,16 @@ function omdbCall(title, key) { //will add to params as we figure out what we ne
         console.log(data);
         let actors = data.Actors;
         let plot = data.Plot;
+        let release = data.Released;
         //create more as needed
-        //console.log(actors, plot);
+        //console.log(actors, plot, release);
     });
 }
 
 function triviaCall(amount, category) { //will add to params as we figure out what we need
     const triviaLink = `https://opentdb.com/api.php?amount=${amount}&category=${category}`;
-    let questionCount = 1;
+    let questionArray = [];
+
     fetch(triviaLink)
     .then(function(response) {
         if (!response.ok) {
@@ -58,11 +60,20 @@ function triviaCall(amount, category) { //will add to params as we figure out wh
         //console.log(data.results);
         for (let question of data.results) {
             //console.log(question.question);
-            console.log(question.correct_answer);
-            console.log(question.incorrect_answers);
+            //console.log(question.correct_answer);
+            //console.log(question.incorrect_answers);
             //console.log(question);
-            questionCount++;
+
+            const individQuestion = {
+                question: question.question,
+                correct: question.correct_answer,
+                incorrect: question.incorrect_answers,
+            }
+
+            questionArray.push(individQuestion);
         }
+        //console.log(questionArray);
+        return questionArray;
     });
 }
 
