@@ -1,1 +1,8 @@
-/* Test */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    font-family: 'Courier New', Courier, monospace;
+}
+
