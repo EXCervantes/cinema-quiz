@@ -45,6 +45,7 @@ function omdbCall(title, key) { //will add to params as we figure out what we ne
     });
 }
 
+// Fetch data from trivia API
 function triviaCall(amount, category) { //will add to params as we figure out what we need
     const triviaLink = `https://opentdb.com/api.php?amount=${amount}&category=${category}`;
     let questionArray = [];
@@ -75,6 +76,11 @@ function triviaCall(amount, category) { //will add to params as we figure out wh
         //console.log(questionArray);
         return questionArray;
     });
+}
+
+// Renders quiz question on page
+function renderQuetions(questionList) {
+
 }
 
 
