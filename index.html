@@ -11,40 +11,47 @@
 </head>
 
 <body>
-    <h2>Quiz Question</h2>
-    <h2>Score</h2>
-    <main>
-        <p>Questions</p>
-        <br>
-        <p>Answer 1</p>
-        <p>Answer 2</p>
-        <p>Answer 3</p>
-        <p>Answer 4</p>
-
-        <button>Previous</button>
-        <button>Submit Answer</button>
-        <button>Next</button>
-    </main>
-    <footer>
-        <h4>Developer Names</h4>
-        <p>Benjamin Hill</p>
-        <p>Jerry Sparling</p>
-        <p>Edwardo Cervantes</p>
-        <p>Ashanty Castro</p>
-        <h4>Socials</h4>
-        <h4>Credits</h4>
-        <h3>(c) Fresh Tomatoes made with HTML, Tailwind CSS, and JavaScript</h3>
-    </footer>
-    <!-- drawer init and toggle -->
-    <div class="text-center">
-        <button
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            type="button" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
-            data-drawer-placement="right" aria-controls="drawer-right-example">
-            Need a hint?
-        </button>
+    <div class="quiz-question-container">
+        <div class="quiz-question-title">
+            <h2>Quiz Question</h2>
+        </div>
+        <main>
+            <div class="quiz-question-card">
+                <div class="question">
+                    <p>Questions</p>
+                </div>
+                <div class="question-one">
+                    <p>Answer 1</p>
+                </div>
+                <div class="question-two">
+                    <p>Answer 2</p>
+                </div>
+                <div class="question-three">
+                    <p>Answer 3</p>
+                </div>
+                <div class="question-four">
+                    <p>Answer 4</p>
+                </div>
+            </div>
+            <div class="score-card">
+                <h2>Score</h2>
+            </div>
+            <div class="prev-bttn"><button>Previous</button></div>
+            <div class="submit-bttn"><button>Submit Answer</button></div>
+            <div class="next-bttn"><button>Next</button></div>
     </div>
-
+    </main>
+    <!-- drawer init and toggle -->
+    <div class="hint-bttn">
+        <div class="text-center">
+            <button
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                type="button" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
+                data-drawer-placement="right" aria-controls="drawer-right-example">
+                Need a hint?
+            </button>
+        </div>
+    </div>
     <!-- drawer component -->
     <div id="drawer-right-example"
         class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-80 dark:bg-gray-800"
@@ -77,6 +84,22 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M1 5h12m0 0L9 1m4 4L9 9" />
                 </svg></a>
+        </div>
+    </div>
+    <div class="footer-container">
+        <div class="dev-names-list">
+            <h4>Developer Names</h4>
+            <p>Benjamin Hill</p>
+            <p>Jerry Sparling</p>
+            <p>Edwardo Cervantes</p>
+            <p>Ashanty Castro</p>
+        </div>
+        <div class="devs-socials">
+            <h4>Socials</h4>
+        </div>
+        <div class="credits-container">
+            <h4>Credits</h4>
+            <h3>(c) Fresh Tomatoes made with HTML, Tailwind CSS, and JavaScript</h3>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
