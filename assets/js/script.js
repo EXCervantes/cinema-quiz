@@ -1,6 +1,7 @@
 const omdbAPIkey = 'bd7078af';
-const triviaToken = 'e3bb47480ed68b6435669ec523a4c57f31be30a663ee24fa6948a4ea360192f5';
 
+/*
+const triviaToken = getTriviaToken();
 function getTriviaToken() {
     const getToken = 'https://opentdb.com/api_token.php?command=request';
 
@@ -19,6 +20,7 @@ function getTriviaToken() {
         return token;
     });
 }
+*/
 
 function omdbCall(title, key) { //will add to params as we figure out what we need
     titleList = title.split(' ');
@@ -35,12 +37,16 @@ function omdbCall(title, key) { //will add to params as we figure out what we ne
     })
     .then(function(data) {
         console.log(data);
+        let actors = data.Actors;
+        let plot = data.Plot;
+        //create more as needed
+        //console.log(actors, plot);
     });
 }
 
-function triviaCall(amount, category, token) { //will add to params as we figure out what we need
-    const triviaLink = `https://opentdb.com/api.php?amount=${amount}&token=${token}&category=${category}`;
-
+function triviaCall(amount, category) { //will add to params as we figure out what we need
+    const triviaLink = `https://opentdb.com/api.php?amount=${amount}&category=${category}`;
+    let questionCount = 1;
     fetch(triviaLink)
     .then(function(response) {
         if (!response.ok) {
@@ -49,20 +55,27 @@ function triviaCall(amount, category, token) { //will add to params as we figure
         return response.json();
     })
     .then(function(data) {
-        console.log(data);
+        //console.log(data.results);
+        for (let question of data.results) {
+            //console.log(question.question);
+            console.log(question.correct_answer);
+            console.log(question.incorrect_answers);
+            //console.log(question);
+            questionCount++;
+        }
     });
 }
 
 
 document.addEventListener('DOMContentLoaded', function() {
     //console.log(getTriviaToken());
-    getTriviaToken();
+    //getTriviaToken();
 
     let movieTitle = 'iron man'; //change to test
     omdbCall(movieTitle, omdbAPIkey);
 
-    let amount = '10'; //change to test
+    const amount = '10'; //change to test
     const category = '11'; //do NOT change
-    triviaCall(amount, category, getTriviaToken());
+    triviaCall(amount, category);
 
 });
