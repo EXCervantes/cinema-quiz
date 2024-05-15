@@ -20,3 +20,10 @@
 main{
     min-width: 60%;
 }
+
+.main-body-red{
+    min-height: 70vh;
+}
+.main-body{
+    min-height: 65vh;
+}
