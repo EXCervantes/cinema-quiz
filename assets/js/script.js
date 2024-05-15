@@ -1,5 +1,6 @@
 const omdbAPIkey = 'bd7078af';
 
+//Get movie info
 async function omdbCall(title, key) {
     titleList = title.split(' ');
     title = titleList.join('+');
@@ -25,6 +26,7 @@ const movieName = document.querySelector('#movieSearch');
 const movieTitle = document.querySelector('#movieTitle');
 const hintLocation = document.querySelector('#hintLocation');
 
+//Render movie info into a readable format in the hint drawer
 function renderHint(hintArray) {
     movieTitle.textContent = movieName.value;
     hintLocation.innerHTML = `
@@ -41,6 +43,7 @@ function renderHint(hintArray) {
 const movieSearchBtn = document.querySelector('.movieSearchBtn');
 const movieSearchForm = document.querySelector('#movieSearchForm');
 
+//Movie search form submit handler
 movieSearchForm.addEventListener('submit', async function (event) {
     event.preventDefault();
     const hintArray = await omdbCall(movieName.value, omdbAPIkey);
@@ -84,14 +87,6 @@ let quizIndex = 0;
 
 // Renders quiz question on page
 function renderQuetions(questionArray) {
-    /*
-    questionPos.innerHTML = questionArray[quizIndex].question;
-
-    questionOne.innerHTML = `<button class= "quizBtn correctAns">${questionArray[quizIndex].correct}</button>`;
-    questionTwo.innerHTML = `<button class= "quizBtn incorrectAns">${questionArray[quizIndex].incorrect[0]}</button>`;
-    questionThree.innerHTML = `<button class= "quizBtn incorrectAns">${questionArray[quizIndex].incorrect[1]}</button>`;
-    questionFour.innerHTML = `<button class= "quizBtn incorrectAns">${questionArray[quizIndex].incorrect[2]}</button>`;
-    */
     const correctAnswerPosition = Math.floor(Math.random() * 4);
 
     // Shuffle incorrect answers to randomize their positions
@@ -111,25 +106,26 @@ function renderQuetions(questionArray) {
         }
     }
 
-    // Render question
     questionPos.innerHTML = questionArray[quizIndex].question;
 }
 
 const scoreDisplay = document.querySelector('.score-card');
+//Updates score on page
 function updateScore() {
-    scoreDisplay.textContent = score;
+    scoreDisplay.textContent = `Score: ${score}/10`;
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
     score = 0;
     quizIndex = 0;
 
-    const amount = '10'; //change to test
-    const category = '11'; //do NOT change
+    const amount = '10';
+    const category = '11';
     let questionArray = await triviaCall(amount, category);
     renderQuetions(questionArray);
     updateScore();  
 
+    //Handle clicking on answers and end of quiz
     document.addEventListener('click', async function(event) {
         const target = event.target;
         if (target.classList.contains('correctAns')) {
