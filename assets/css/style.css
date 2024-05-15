@@ -12,3 +12,11 @@
     margin-top: 5px;
     padding: 2px;
 }
+
+.left-header{
+    max-width: 30%;
+}
+
+main{
+    min-width: 60%;
+}

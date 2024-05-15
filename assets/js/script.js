@@ -88,10 +88,10 @@ let quizIndex = 0;
 function renderQuetions(questionArray) {
     questionPos.innerHTML = questionArray[quizIndex].question;
 
-    questionOne.innerHTML = `<button class= quizBtn correctAns>${questionArray[quizIndex].correct}<button>`;
-    questionTwo.innerHTML = `<button class= quizBtn incorrectAns>${questionArray[quizIndex].incorrect[0]}<button>`;
-    questionThree.innerHTML = `<button class= quizBtn incorrectAns>${questionArray[quizIndex].incorrect[1]}<button>`;
-    questionFour.innerHTML = `<button class= quizBtn incorrectAns>${questionArray[quizIndex].incorrect[2]}<button>`;
+    questionOne.innerHTML = `<button class= "quizBtn correctAns">${questionArray[quizIndex].correct}</button>`;
+    questionTwo.innerHTML = `<button class= "quizBtn incorrectAns">${questionArray[quizIndex].incorrect[0]}</button>`;
+    questionThree.innerHTML = `<button class= "quizBtn incorrectAns">${questionArray[quizIndex].incorrect[1]}</button>`;
+    questionFour.innerHTML = `<button class= "quizBtn incorrectAns">${questionArray[quizIndex].incorrect[2]}</button>`;
 
 }
 
@@ -100,19 +100,20 @@ function updateScore() {
     scoreDisplay.textContent = score;
 }
 
-document.addEventListener('click', function(event) {
+/*
+document.addEventListener('click', async function(event) {
     const target = event.target;
     if (target.classList.contains('correctAns')) {
-        console.log('before');
         score++;
         quizIndex++;
         updateScore();
-        console.log('after');
+        renderQuetions(questionArray)
     } else if (target.classList.contains('incorrectAns')) {
         quizIndex++;
+        renderQuetions(questionArray)
     }
 });
-
+*/
 
 document.addEventListener('DOMContentLoaded', async function() {
     score = 0;
@@ -123,5 +124,25 @@ document.addEventListener('DOMContentLoaded', async function() {
     let questionArray = await triviaCall(amount, category);
     renderQuetions(questionArray);
     updateScore();  
+
+    document.addEventListener('click', async function(event) {
+        const target = event.target;
+        if (target.classList.contains('correctAns')) {
+            score++;
+            quizIndex++;
+            updateScore();
+            renderQuetions(questionArray);
+            if (quizIndex === 9) {
+                window.alert(`Quiz complete. Score: ${score}`);
+                return;
+            }
+        } else if (target.classList.contains('incorrectAns')) {
+            quizIndex++;
+            renderQuetions(questionArray);
+            if (quizIndex === 9) {
+                window.alert(`Quiz complete. Score: ${score}`);
+            }
+        }
+    });
 
 });
