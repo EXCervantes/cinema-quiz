@@ -153,10 +153,10 @@ async function triviaCall(amount, category) { //will add to params as we figure 
 
 const questionPos = document.querySelector('.question')
 
-const questionOne = document.querySelector('.question-one')
-const questionTwo = document.querySelector('.question-two')
-const questionThree = document.querySelector('.question-three')
-const questionFour = document.querySelector('.question-four')
+const questionOne = document.querySelector('.answer-one')
+const questionTwo = document.querySelector('.answer-two')
+const questionThree = document.querySelector('.answer-three')
+const questionFour = document.querySelector('.answer-four')
 
 // Renders quiz question on page
 function renderQuetions(questionArray) {
