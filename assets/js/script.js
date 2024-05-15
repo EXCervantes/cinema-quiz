@@ -1,35 +1,12 @@
 const omdbAPIkey = 'bd7078af';
 
-/*
-const triviaToken = getTriviaToken();
-function getTriviaToken() {
-    const getToken = 'https://opentdb.com/api_token.php?command=request';
-
-    fetch(getToken)
-    .then(function(response) {
-        if (!response.ok) {
-            alert('Network response was not ok :(');
-        }
-        return response.json();
-    })
-    .then(function(data) {
-        //console.log(data);
-        const token = data.token;
-
-        //console.log(token);
-        return token;
-    });
-}
-*/
-
-async function omdbCall(title, key) { //will add to params as we figure out what we need
+//Get movie info
+async function omdbCall(title, key) {
     titleList = title.split(' ');
     title = titleList.join('+');
-    //console.log(title);
     const omdbLink = `https://www.omdbapi.com/?apikey=${key}&t=${title}&plot=full`;
 
     let hintArray = [];
-    
     let response = await fetch(omdbLink);
     if (!response.ok) {
         alert('Network response was not ok :(');
@@ -42,32 +19,14 @@ async function omdbCall(title, key) { //will add to params as we figure out what
     let director = data.Director;
     hintArray.push(actors,plot,release,director);
     return hintArray;
-    
-    /* fetch(omdbLink)
-    .then(function(response) {
-        if (!response.ok) {
-            alert('Network response was not ok :(');
-        }
-        return response.json();
-    })
-    .then(function(data) {
-        console.log(data);
-        let actors = data.Actors;
-        let plot = data.Plot;
-        let release = data.Released;
-        //create more as needed
-        //console.log(actors, plot, release);
 
-        hintArray.push(actors,plot,release);
-        return hintArray;
-    });
-    */
 }
 
 const movieName = document.querySelector('#movieSearch');
 const movieTitle = document.querySelector('#movieTitle');
 const hintLocation = document.querySelector('#hintLocation');
 
+//Render movie info into a readable format in the hint drawer
 function renderHint(hintArray) {
     movieTitle.textContent = movieName.value;
     hintLocation.innerHTML = `
@@ -84,16 +43,15 @@ function renderHint(hintArray) {
 const movieSearchBtn = document.querySelector('.movieSearchBtn');
 const movieSearchForm = document.querySelector('#movieSearchForm');
 
+//Movie search form submit handler
 movieSearchForm.addEventListener('submit', async function (event) {
     event.preventDefault();
-    //const movieName = document.querySelector('#movieSearch');
-    //console.log(movieName.value);
     const hintArray = await omdbCall(movieName.value, omdbAPIkey);
     renderHint(hintArray);
 });
 
 // Fetch data from trivia API
-async function triviaCall(amount, category) { //will add to params as we figure out what we need
+async function triviaCall(amount, category) {
     const triviaLink = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=easy&type=multiple`;
     let questionArray = [];
 
@@ -104,11 +62,6 @@ async function triviaCall(amount, category) { //will add to params as we figure 
     }
     let data = await response.json();
     for (let question of data.results) {
-        //console.log(question.question);
-        //console.log(question.correct_answer);
-        //console.log(question.incorrect_answers);
-        //console.log(question);
-
         const individQuestion = {
             question: question.question,
             correct: question.correct_answer,
@@ -120,66 +73,84 @@ async function triviaCall(amount, category) { //will add to params as we figure 
     console.log(questionArray);
     return questionArray;
 
-
-    /*
-    .then(function(response) {
-        if (!response.ok) {
-            alert('Network response was not ok :(');
-        }
-        return response.json();
-    })
-    .then(function(data) {
-        //console.log(data.results);
-        for (let question of data.results) {
-            //console.log(question.question);
-            //console.log(question.correct_answer);
-            //console.log(question.incorrect_answers);
-            //console.log(question);
-
-            const individQuestion = {
-                question: question.question,
-                correct: question.correct_answer,
-                incorrect: question.incorrect_answers,
-            }
-
-            questionArray.push(individQuestion);
-        }
-        console.log(questionArray);
-        return questionArray;
-    });
-    */
 }
-
 
 const questionPos = document.querySelector('.question')
 
-const questionOne = document.querySelector('.answer-one')
-const questionTwo = document.querySelector('.answer-two')
-const questionThree = document.querySelector('.answer-three')
-const questionFour = document.querySelector('.answer-four')
+const answerOne = document.querySelector('.answer-one')
+const answerTwo = document.querySelector('.answer-two')
+const answerThree = document.querySelector('.answer-three')
+const answerFour = document.querySelector('.answer-four')
+
+let score = 0;
+let quizIndex = 0;
 
 // Renders quiz question on page
 function renderQuetions(questionArray) {
-    questionPos.innerHTML = questionArray[0].question;
+    const correctAnswerPosition = Math.floor(Math.random() * 4);
 
-    questionOne.innerHTML = `<button class=quizBtn>${questionArray[0].correct}<button>`;
-    questionTwo.innerHTML = `<button class=quizBtn>${questionArray[0].incorrect[0]}<button>`;
-    questionThree.innerHTML = `<button class=quizBtn>${questionArray[0].incorrect[1]}<button>`;
-    questionFour.innerHTML = `<button class=quizBtn>${questionArray[0].incorrect[2]}<button>`;
+    // Shuffle incorrect answers to randomize their positions
+    const incorrectAnswers = questionArray[quizIndex].incorrect.slice();
+    for (let i = incorrectAnswers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [incorrectAnswers[i], incorrectAnswers[j]] = [incorrectAnswers[j], incorrectAnswers[i]];
+    }
 
+    // Place the correct answer in its random position with the correct class
+    const buttons = [answerOne, answerTwo, answerThree, answerFour];
+    for (let i = 0; i < buttons.length; i++) {
+        if (i === correctAnswerPosition) {
+            buttons[i].innerHTML = `<button class="quizBtn correctAns">${questionArray[quizIndex].correct}</button>`;
+        } else {
+            buttons[i].innerHTML = `<button class="quizBtn incorrectAns">${incorrectAnswers.pop()}</button>`;
+        }
+    }
+
+    questionPos.innerHTML = questionArray[quizIndex].question;
 }
 
-
+const scoreDisplay = document.querySelector('.score-card');
+//Updates score on page
+function updateScore() {
+    scoreDisplay.textContent = `Score: ${score}/10`;
+}
 
 document.addEventListener('DOMContentLoaded', async function() {
-    //console.log(getTriviaToken());
-    //getTriviaToken();
+    score = 0;
+    quizIndex = 0;
 
-    let currentQuestion = 0;
-
-    const amount = '10'; //change to test
-    const category = '11'; //do NOT change
+    const amount = '10';
+    const category = '11';
     let questionArray = await triviaCall(amount, category);
     renderQuetions(questionArray);
+    updateScore();  
+
+    //Handle clicking on answers and end of quiz
+    document.addEventListener('click', async function(event) {
+        const target = event.target;
+        if (target.classList.contains('correctAns')) {
+            if (quizIndex === 9) {
+                score++;
+                updateScore();
+                window.alert(`Quiz complete. Score: ${score}/10
+Reload page to take another quiz.`);
+                return;
+            }
+            score++;
+            quizIndex++;
+            updateScore();
+            renderQuetions(questionArray);
+            
+        } else if (target.classList.contains('incorrectAns')) {
+            if (quizIndex === 9) {
+                window.alert(`Quiz complete. Score: ${score}/10
+Reload page to take another quiz.`);
+                return;
+            }
+            quizIndex++;
+            renderQuetions(questionArray);
+            
+        }
+    });
 
 });
