@@ -74,23 +74,45 @@ async function triviaCall(amount, category) {
 
 const questionPos = document.querySelector('.question')
 
-const questionOne = document.querySelector('.answer-one')
-const questionTwo = document.querySelector('.answer-two')
-const questionThree = document.querySelector('.answer-three')
-const questionFour = document.querySelector('.answer-four')
+const answerOne = document.querySelector('.answer-one')
+const answerTwo = document.querySelector('.answer-two')
+const answerThree = document.querySelector('.answer-three')
+const answerFour = document.querySelector('.answer-four')
 
 let score = 0;
 let quizIndex = 0;
 
 // Renders quiz question on page
 function renderQuetions(questionArray) {
+    /*
     questionPos.innerHTML = questionArray[quizIndex].question;
 
     questionOne.innerHTML = `<button class= "quizBtn correctAns">${questionArray[quizIndex].correct}</button>`;
     questionTwo.innerHTML = `<button class= "quizBtn incorrectAns">${questionArray[quizIndex].incorrect[0]}</button>`;
     questionThree.innerHTML = `<button class= "quizBtn incorrectAns">${questionArray[quizIndex].incorrect[1]}</button>`;
     questionFour.innerHTML = `<button class= "quizBtn incorrectAns">${questionArray[quizIndex].incorrect[2]}</button>`;
+    */
+    const correctAnswerPosition = Math.floor(Math.random() * 4);
 
+    // Shuffle incorrect answers to randomize their positions
+    const incorrectAnswers = questionArray[quizIndex].incorrect.slice();
+    for (let i = incorrectAnswers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [incorrectAnswers[i], incorrectAnswers[j]] = [incorrectAnswers[j], incorrectAnswers[i]];
+    }
+
+    // Place the correct answer in its random position with the correct class
+    const buttons = [answerOne, answerTwo, answerThree, answerFour];
+    for (let i = 0; i < buttons.length; i++) {
+        if (i === correctAnswerPosition) {
+            buttons[i].innerHTML = `<button class="quizBtn correctAns">${questionArray[quizIndex].correct}</button>`;
+        } else {
+            buttons[i].innerHTML = `<button class="quizBtn incorrectAns">${incorrectAnswers.pop()}</button>`;
+        }
+    }
+
+    // Render question
+    questionPos.innerHTML = questionArray[quizIndex].question;
 }
 
 const scoreDisplay = document.querySelector('.score-card');
@@ -115,16 +137,22 @@ document.addEventListener('DOMContentLoaded', async function() {
             quizIndex++;
             updateScore();
             renderQuetions(questionArray);
-            if (quizIndex === 9) {
+            /*
+            console.log(quizIndex);
+            if (quizIndex === 10) {
                 window.alert(`Quiz complete. Score: ${score}`);
                 return;
             }
+            */
         } else if (target.classList.contains('incorrectAns')) {
             quizIndex++;
             renderQuetions(questionArray);
-            if (quizIndex === 9) {
+            /*
+            console.log(quizIndex);
+            if (quizIndex === 10) {
                 window.alert(`Quiz complete. Score: ${score}`);
             }
+            */
         }
     });
 
