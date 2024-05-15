@@ -26,7 +26,7 @@ async function omdbCall(title, key) { //will add to params as we figure out what
     titleList = title.split(' ');
     title = titleList.join('+');
     //console.log(title);
-    const omdbLink = `http://www.omdbapi.com/?apikey=${key}&t=${title}&plot=full`;
+    const omdbLink = `https://www.omdbapi.com/?apikey=${key}&t=${title}&plot=full`;
 
     let hintArray = [];
     
