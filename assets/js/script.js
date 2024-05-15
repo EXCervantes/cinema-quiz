@@ -6,7 +6,6 @@ async function omdbCall(title, key) {
     const omdbLink = `https://www.omdbapi.com/?apikey=${key}&t=${title}&plot=full`;
 
     let hintArray = [];
-    
     let response = await fetch(omdbLink);
     if (!response.ok) {
         alert('Network response was not ok :(');
@@ -73,7 +72,6 @@ async function triviaCall(amount, category) {
 
 }
 
-
 const questionPos = document.querySelector('.question')
 
 const questionOne = document.querySelector('.answer-one')
@@ -99,21 +97,6 @@ const scoreDisplay = document.querySelector('.score-card');
 function updateScore() {
     scoreDisplay.textContent = score;
 }
-
-/*
-document.addEventListener('click', async function(event) {
-    const target = event.target;
-    if (target.classList.contains('correctAns')) {
-        score++;
-        quizIndex++;
-        updateScore();
-        renderQuetions(questionArray)
-    } else if (target.classList.contains('incorrectAns')) {
-        quizIndex++;
-        renderQuetions(questionArray)
-    }
-});
-*/
 
 document.addEventListener('DOMContentLoaded', async function() {
     score = 0;
