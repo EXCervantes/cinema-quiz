@@ -5,3 +5,10 @@
 * {
     font-family: 'Courier New', Courier, monospace;
 }
+
+.quizBtn{
+    border: 2px solid black;
+    background-color: rgb(224, 224, 224);
+    margin-top: 5px;
+    padding: 2px;
+}

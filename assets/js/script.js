@@ -88,10 +88,10 @@ let quizIndex = 0;
 function renderQuetions(questionArray) {
     questionPos.innerHTML = questionArray[quizIndex].question;
 
-    questionOne.innerHTML = `<button class=quizBtn correctAns>${questionArray[quizIndex].correct}<button>`;
-    questionTwo.innerHTML = `<button class=quizBtn incorrectAns>${questionArray[quizIndex].incorrect[0]}<button>`;
-    questionThree.innerHTML = `<button class=quizBtn incorrectAns>${questionArray[quizIndex].incorrect[1]}<button>`;
-    questionFour.innerHTML = `<button class=quizBtn incorrectAns>${questionArray[quizIndex].incorrect[2]}<button>`;
+    questionOne.innerHTML = `<button class= quizBtn correctAns>${questionArray[quizIndex].correct}<button>`;
+    questionTwo.innerHTML = `<button class= quizBtn incorrectAns>${questionArray[quizIndex].incorrect[0]}<button>`;
+    questionThree.innerHTML = `<button class= quizBtn incorrectAns>${questionArray[quizIndex].incorrect[1]}<button>`;
+    questionFour.innerHTML = `<button class= quizBtn incorrectAns>${questionArray[quizIndex].incorrect[2]}<button>`;
 
 }
 
