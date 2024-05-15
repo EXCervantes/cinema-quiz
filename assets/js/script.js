@@ -133,26 +133,27 @@ document.addEventListener('DOMContentLoaded', async function() {
     document.addEventListener('click', async function(event) {
         const target = event.target;
         if (target.classList.contains('correctAns')) {
+            if (quizIndex === 9) {
+                score++;
+                updateScore();
+                window.alert(`Quiz complete. Score: ${score}/10
+Reload page to take another quiz.`);
+                return;
+            }
             score++;
             quizIndex++;
             updateScore();
             renderQuetions(questionArray);
-            /*
-            console.log(quizIndex);
-            if (quizIndex === 10) {
-                window.alert(`Quiz complete. Score: ${score}`);
+            
+        } else if (target.classList.contains('incorrectAns')) {
+            if (quizIndex === 9) {
+                window.alert(`Quiz complete. Score: ${score}/10
+Reload page to take another quiz.`);
                 return;
             }
-            */
-        } else if (target.classList.contains('incorrectAns')) {
             quizIndex++;
             renderQuetions(questionArray);
-            /*
-            console.log(quizIndex);
-            if (quizIndex === 10) {
-                window.alert(`Quiz complete. Score: ${score}`);
-            }
-            */
+            
         }
     });
 
