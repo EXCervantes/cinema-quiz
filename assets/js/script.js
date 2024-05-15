@@ -1,31 +1,8 @@
 const omdbAPIkey = 'bd7078af';
 
-/*
-const triviaToken = getTriviaToken();
-function getTriviaToken() {
-    const getToken = 'https://opentdb.com/api_token.php?command=request';
-
-    fetch(getToken)
-    .then(function(response) {
-        if (!response.ok) {
-            alert('Network response was not ok :(');
-        }
-        return response.json();
-    })
-    .then(function(data) {
-        //console.log(data);
-        const token = data.token;
-
-        //console.log(token);
-        return token;
-    });
-}
-*/
-
-async function omdbCall(title, key) { //will add to params as we figure out what we need
+async function omdbCall(title, key) {
     titleList = title.split(' ');
     title = titleList.join('+');
-    //console.log(title);
     const omdbLink = `https://www.omdbapi.com/?apikey=${key}&t=${title}&plot=full`;
 
     let hintArray = [];
@@ -42,26 +19,7 @@ async function omdbCall(title, key) { //will add to params as we figure out what
     let director = data.Director;
     hintArray.push(actors,plot,release,director);
     return hintArray;
-    
-    /* fetch(omdbLink)
-    .then(function(response) {
-        if (!response.ok) {
-            alert('Network response was not ok :(');
-        }
-        return response.json();
-    })
-    .then(function(data) {
-        console.log(data);
-        let actors = data.Actors;
-        let plot = data.Plot;
-        let release = data.Released;
-        //create more as needed
-        //console.log(actors, plot, release);
 
-        hintArray.push(actors,plot,release);
-        return hintArray;
-    });
-    */
 }
 
 const movieName = document.querySelector('#movieSearch');
@@ -86,14 +44,12 @@ const movieSearchForm = document.querySelector('#movieSearchForm');
 
 movieSearchForm.addEventListener('submit', async function (event) {
     event.preventDefault();
-    //const movieName = document.querySelector('#movieSearch');
-    //console.log(movieName.value);
     const hintArray = await omdbCall(movieName.value, omdbAPIkey);
     renderHint(hintArray);
 });
 
 // Fetch data from trivia API
-async function triviaCall(amount, category) { //will add to params as we figure out what we need
+async function triviaCall(amount, category) {
     const triviaLink = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=easy&type=multiple`;
     let questionArray = [];
 
@@ -104,11 +60,6 @@ async function triviaCall(amount, category) { //will add to params as we figure 
     }
     let data = await response.json();
     for (let question of data.results) {
-        //console.log(question.question);
-        //console.log(question.correct_answer);
-        //console.log(question.incorrect_answers);
-        //console.log(question);
-
         const individQuestion = {
             question: question.question,
             correct: question.correct_answer,
@@ -120,34 +71,6 @@ async function triviaCall(amount, category) { //will add to params as we figure 
     console.log(questionArray);
     return questionArray;
 
-
-    /*
-    .then(function(response) {
-        if (!response.ok) {
-            alert('Network response was not ok :(');
-        }
-        return response.json();
-    })
-    .then(function(data) {
-        //console.log(data.results);
-        for (let question of data.results) {
-            //console.log(question.question);
-            //console.log(question.correct_answer);
-            //console.log(question.incorrect_answers);
-            //console.log(question);
-
-            const individQuestion = {
-                question: question.question,
-                correct: question.correct_answer,
-                incorrect: question.incorrect_answers,
-            }
-
-            questionArray.push(individQuestion);
-        }
-        console.log(questionArray);
-        return questionArray;
-    });
-    */
 }
 
 
@@ -158,28 +81,47 @@ const questionTwo = document.querySelector('.answer-two')
 const questionThree = document.querySelector('.answer-three')
 const questionFour = document.querySelector('.answer-four')
 
+let score = 0;
+let quizIndex = 0;
+
 // Renders quiz question on page
 function renderQuetions(questionArray) {
-    questionPos.innerHTML = questionArray[0].question;
+    questionPos.innerHTML = questionArray[quizIndex].question;
 
-    questionOne.innerHTML = `<button class=quizBtn>${questionArray[0].correct}<button>`;
-    questionTwo.innerHTML = `<button class=quizBtn>${questionArray[0].incorrect[0]}<button>`;
-    questionThree.innerHTML = `<button class=quizBtn>${questionArray[0].incorrect[1]}<button>`;
-    questionFour.innerHTML = `<button class=quizBtn>${questionArray[0].incorrect[2]}<button>`;
+    questionOne.innerHTML = `<button class=quizBtn correctAns>${questionArray[quizIndex].correct}<button>`;
+    questionTwo.innerHTML = `<button class=quizBtn incorrectAns>${questionArray[quizIndex].incorrect[0]}<button>`;
+    questionThree.innerHTML = `<button class=quizBtn incorrectAns>${questionArray[quizIndex].incorrect[1]}<button>`;
+    questionFour.innerHTML = `<button class=quizBtn incorrectAns>${questionArray[quizIndex].incorrect[2]}<button>`;
 
 }
 
+const scoreDisplay = document.querySelector('.score-card');
+function updateScore() {
+    scoreDisplay.textContent = score;
+}
+
+document.addEventListener('click', function(event) {
+    const target = event.target;
+    if (target.classList.contains('correctAns')) {
+        console.log('before');
+        score++;
+        quizIndex++;
+        updateScore();
+        console.log('after');
+    } else if (target.classList.contains('incorrectAns')) {
+        quizIndex++;
+    }
+});
 
 
 document.addEventListener('DOMContentLoaded', async function() {
-    //console.log(getTriviaToken());
-    //getTriviaToken();
-
-    let currentQuestion = 0;
+    score = 0;
+    quizIndex = 0;
 
     const amount = '10'; //change to test
     const category = '11'; //do NOT change
     let questionArray = await triviaCall(amount, category);
     renderQuetions(questionArray);
+    updateScore();  
 
 });
