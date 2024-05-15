@@ -25,7 +25,7 @@ function getTriviaToken() {
 async function omdbCall(title, key) { //will add to params as we figure out what we need
     titleList = title.split(' ');
     title = titleList.join('+');
-    console.log(title);
+    //console.log(title);
     const omdbLink = `http://www.omdbapi.com/?apikey=${key}&t=${title}&plot=full`;
 
     let hintArray = [];
@@ -39,7 +39,8 @@ async function omdbCall(title, key) { //will add to params as we figure out what
     let actors = data.Actors;
     let plot = data.Plot;
     let release = data.Released;
-    hintArray.push(actors,plot,release);
+    let director = data.Director;
+    hintArray.push(actors,plot,release,director);
     return hintArray;
     
     /* fetch(omdbLink)
@@ -72,6 +73,8 @@ function renderHint(hintArray) {
     hintLocation.innerHTML = `
         <p>Main Actors: ${hintArray[0]}</p>
         <br>
+        <p>Director(s): ${hintArray[3]}</p>
+        <br>
         <p>Plot: ${hintArray[1]}</p>
         <br>
         <p>Release Date: ${hintArray[2]}</p>
@@ -84,17 +87,41 @@ const movieSearchForm = document.querySelector('#movieSearchForm');
 movieSearchForm.addEventListener('submit', async function (event) {
     event.preventDefault();
     //const movieName = document.querySelector('#movieSearch');
-    console.log(movieName.value);
+    //console.log(movieName.value);
     const hintArray = await omdbCall(movieName.value, omdbAPIkey);
     renderHint(hintArray);
 });
 
 // Fetch data from trivia API
-function triviaCall(amount, category) { //will add to params as we figure out what we need
-    const triviaLink = `https://opentdb.com/api.php?amount=${amount}&category=${category}`;
+async function triviaCall(amount, category) { //will add to params as we figure out what we need
+    const triviaLink = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=easy&type=multiple`;
     let questionArray = [];
 
-    fetch(triviaLink)
+    let response = await fetch(triviaLink);
+    if (!response.ok) {
+        alert('Network response was not ok :(');
+        return;
+    }
+    let data = await response.json();
+    for (let question of data.results) {
+        //console.log(question.question);
+        //console.log(question.correct_answer);
+        //console.log(question.incorrect_answers);
+        //console.log(question);
+
+        const individQuestion = {
+            question: question.question,
+            correct: question.correct_answer,
+            incorrect: question.incorrect_answers,
+        }
+
+        questionArray.push(individQuestion);
+    }
+    console.log(questionArray);
+    return questionArray;
+
+
+    /*
     .then(function(response) {
         if (!response.ok) {
             alert('Network response was not ok :(');
@@ -117,28 +144,42 @@ function triviaCall(amount, category) { //will add to params as we figure out wh
 
             questionArray.push(individQuestion);
         }
-        //console.log(questionArray);
+        console.log(questionArray);
         return questionArray;
     });
+    */
 }
+
+
+const questionPos = document.querySelector('.question')
+
+const questionOne = document.querySelector('.question-one')
+const questionTwo = document.querySelector('.question-two')
+const questionThree = document.querySelector('.question-three')
+const questionFour = document.querySelector('.question-four')
 
 // Renders quiz question on page
-function renderQuetions(questionList) {
+function renderQuetions(questionArray) {
+    questionPos.innerHTML = questionArray[0].question;
+
+    questionOne.innerHTML = `<button class=quizBtn>${questionArray[0].correct}<button>`;
+    questionTwo.innerHTML = `<button class=quizBtn>${questionArray[0].incorrect[0]}<button>`;
+    questionThree.innerHTML = `<button class=quizBtn>${questionArray[0].incorrect[1]}<button>`;
+    questionFour.innerHTML = `<button class=quizBtn>${questionArray[0].incorrect[2]}<button>`;
 
 }
 
 
-/*
-document.addEventListener('DOMContentLoaded', function() {
+
+document.addEventListener('DOMContentLoaded', async function() {
     //console.log(getTriviaToken());
     //getTriviaToken();
 
-    let movieTitleTest = 'iron man'; //change to test
-    omdbCall(movieName, omdbAPIkey);
+    let currentQuestion = 0;
 
     const amount = '10'; //change to test
     const category = '11'; //do NOT change
-    triviaCall(amount, category);
+    let questionArray = await triviaCall(amount, category);
+    renderQuetions(questionArray);
 
 });
-*/
