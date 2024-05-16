@@ -25,139 +25,130 @@
         }
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
-    <title>Cinema Quiz</title>
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Cinema Quiz</title>
 </head>
-<div class="grid-rows-5 bg-boxborderbutton">
 
-    <body>
-        <div class="bg-backdrop border-solid border-2 border-black container rounded-lg shadow mx-auto max-width">
-            <h1 class="table items-center text-4xl font-bold dark:text-white">Cinema<span
-                    class="bg-blue-100 text-blue-800 text-2xl font-semibold me-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-2">QUIZ</span>
+<body>
+    <div class="p-6">
+        <div
+            class="bg-backdrop border-solid border-2 border-black container rounded-lg shadow mx-auto min-w-25 pt-2 p-2">
+            <h1 class="table items-center text-6xl font-bold dark:text-white">Cinema<span
+                    class="bg-yellow-100 text-backdrop text-4xl font-semibold me-2 px-2.5 py-0.75 rounded dark:bg-blue-200 dark:text-blue-800 ms-2">QUIZ</span>
             </h1>
         </div>
-
-        <div class="sm:flex sm:items-center sm:justify-around">
-            <div class="bg-backdrop border-solid border-2 border-black container rounded-lg shadow mx-auto max-width"
-                id="quiz-question-container">
-                <main>
-                    <h2 class="text-3xl font-bold dark:text-white">Quiz Question Goes Here</h2>
-                    <div class="quiz-question-card">
-                        <div class="question">
-                            <p>Questions</p>
-                        </div>
-                        <div class="answer-one">
-                            <p>Answer 1</p>
-                        </div>
-                        <div class="answer-two">
-                            <p>Answer 2</p>
-                        </div>
-                        <div class="answer-three">
-                            <p>Answer 3</p>
-                        </div>
-                        <div class="answer-four">
-                            <p>Answer 4</p>
-                        </div>
-                    </div>
-                    <div class="score-card">
-                        <h2>Score</h2>
-                    </div>
-                    <div id="quiz-bttn-row" class=" flex flex-wrap">
-                        <div class="prev-bttn"><button type="button"
-                                class="focus:outline-none text-black bg-litpopcorn hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
-                                Previous Question</button></div>
-                        <div class="submit-bttn"><button type="button"
-                                class="focus:outline-none text-black bg-submitgreen hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                Submit Answer ✅</button>
-                        </div>
-                        <div class="next-bttn"><button type="button"
-                                class="focus:outline-none text-black bg-litpopcorn hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
-                                Next Question</button></div>
-                    </div>
-                    <div class="hint-bttn">
-                        <div class="text-center">
-                            <button
-                                class="text-black bg-submitgreen hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                                type="button" data-drawer-target="drawer-right-example"
-                                data-drawer-show="drawer-right-example" data-drawer-placement="right"
-                                aria-controls="drawer-right-example">
-                                Need a hint?
-                            </button>
-                        </div>
-                    </div>
-            </div>
-            </main>
-
-        </div>
-        <footer class="bg-backdrop border-black border-solid border-2 rounded-lg shadow dark:bg-gray-900 m-10 my-4">
-            <div class="w-full max-w-screen-xl mx-auto py-2 md:py-4">
-                <div class="sm:flex sm:items-center sm:justify-between">
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Project
-                        Developers</span>
-                    </a>
-                    <ul
-                        class="flex flex-wrap items-center mb-6 text-base font-medium text-black sm:mb-0 dark:text-gray-400">
-                        <li>
-                            <a href="#" class="hover:underline me-4 md:me-6">Benjamin Hill</a>
-                        </li>
-                        <li>
-                            <a href="#" class="hover:underline me-4 md:me-6">Jerry Sparling</a>
-                        </li>
-                        <li>
-                            <a href="#" class="hover:underline me-4 md:me-6">Ashanty Castro</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/EXCervantes" class="hover:underline">Edwardo Cervantes</a>
-                        </li>
-                    </ul>
+    </div>
+    <div class="min-h-4 sm:flex sm:items-center sm:justify-around p-6">
+        <div class="bg-backdrop border-solid border-2 border-black min-h-4 container rounded-lg shadow mx-auto max-width"
+            id="quiz-question-container">
+            <main>
+                <div class="p-3">
+                    <h2 class="text-4xl font-bold dark:text-white">Quiz Question</h2>
                 </div>
-                <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-                <span class="block text-sm text-black sm:text-center dark:text-gray-400">© 2023 Fresh Tomatoes made
-                    with
-                    HTML, Tailwind/Flowbite CSS, and JavaScript</span>
-            </div>
-        </footer>
-        <!-- drawer component -->
-        <div id="drawer-right-example"
-            class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-backdrop w-1/3 dark:bg-gray-800"
-            tabindex="-1" aria-labelledby="drawer-right-label">
-            <h3 id="drawer-right-label"
-                class="inline-flex items-center mb-4 text-base font-semibold text-white dark:text-gray-400"><svg
-                    class="w-4 h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                </svg>Search Movies</h3>
-            <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
-                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
-                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 14 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                </svg>
-                <span class="sr-only">Close menu</span>
-            </button>
-            <form id="movieSearchForm">
-                <label for="movieSearch">Search for your movie:</label>
-                <input type="text" id="movieSearch" name="movieSearch" placeholder="Cool Movie Name">
-                <input type="submit" value="Search" id="submit" class="movieSearchBtn">
-            </form>
-            <h4 id="movieTitle" class="mb-6 text-sm text-gray-500 dark:text-gray-400">Movie Title</h4>
-            <p class="mb-6 text-sm text-gray-500 dark:text-gray-400" id="hintLocation"> Movie Description and
-                Information</p>
+                <div class="quiz-question-card">
+                    <div class="question">
+                    </div>
+                    <div class="answer-one">
+                        <p>Answer 1</p>
+                    </div>
+                    <div class="answer-two">
+                        <p>Answer 2</p>
+                    </div>
+                    <div class="answer-three">
+                        <p>Answer 3</p>
+                    </div>
+                    <div class="answer-four">
+                        <p>Answer 4</p>
+                    </div>
+                </div>
+                <div class="score-card">
+                    <h2>Score</h2>
+                </div>
+                <div id="quiz-bttn-row" class=" flex flex-wrap">
+                    <div class="prev-bttn"><button type="button"
+                            class="focus:outline-none text-black bg-litpopcorn hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
+                            Previous Question</button></div>
+                    <div class="submit-bttn"><button type="button"
+                            class="focus:outline-none text-black bg-submitgreen hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            Submit Answer ✅</button>
+                    </div>
+                    <div class="next-bttn"><button type="button"
+                            class="focus:outline-none text-black bg-litpopcorn hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
+                            Next Question</button></div>
+                </div>
+                <div class="hint-bttn">
+                    <div class="text-center">
+                        <button
+                            class="text-black bg-submitgreen hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                            type="button" data-drawer-target="drawer-right-example"
+                            data-drawer-show="drawer-right-example" data-drawer-placement="right"
+                            aria-controls="drawer-right-example">
+                            Need a hint?
+                        </button>
+                    </div>
+                </div>
         </div>
-
-
-
-</div>
-
-
-
-
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-<script src="./assets/js/script.js"></script>
+        </main>
+    </div>
+    <footer class="bg-backdrop border-black border-solid border-2 rounded-lg shadow dark:bg-gray-900 mx-10 my-10">
+        <div class="w-full max-w-screen-xl mx-auto py-2 md:py-4">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Project
+                    Developers</span>
+                </a>
+                <ul
+                    class="flex flex-wrap items-center mb-6 text-base font-medium text-black sm:mb-0 dark:text-gray-400">
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Benjamin Hill</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Jerry Sparling</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Ashanty Castro</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/EXCervantes" class="hover:underline">Edwardo Cervantes</a>
+                    </li>
+                </ul>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <span class="block text-sm text-black sm:text-center dark:text-gray-400">© 2023 Fresh Tomatoes made
+                with
+                HTML, Tailwind/Flowbite CSS, and JavaScript</span>
+        </div>
+    </footer>
+    <!-- drawer component -->
+    <div id="drawer-right-example"
+        class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-backdrop w-1/3 dark:bg-gray-800"
+        tabindex="-1" aria-labelledby="drawer-right-label">
+        <h3 id="drawer-right-label"
+            class="inline-flex items-center mb-4 text-base font-semibold text-white dark:text-gray-400"><svg
+                class="w-4 h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                viewBox="0 0 20 20">
+                <path
+                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>Search Movies</h3>
+        <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
+            class="text-black bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            </svg>
+            <span class="sr-only">Close menu</span>
+        </button>
+        <form id="movieSearchForm">
+            <label for="movieSearch">Search for your movie:</label>
+            <input type="text" id="movieSearch" name="movieSearch" placeholder="Cool Movie Name">
+            <input type="submit" value="Search" id="submit" class="movieSearchBtn">
+        </form>
+        <h4 id="movieTitle" class="mb-6 text-sm text-black dark:text-gray-400">Movie Title</h4>
+        <p class="mb-6 text-sm text-black dark:text-gray-400" id="hintLocation"> Movie Description and
+            Information</p>
+    </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </div>
 
