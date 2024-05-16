@@ -12,8 +12,7 @@ We all learned about a couple new frameworks named Tailwind CSS ane Flowbite whi
 
 ## Installation
 
-You can either just go to the website from the Github repository or via this [link](https://excervantes.github.io/cinema-quiz/) or clone the code from the repository. 
-You can either just go to the website from the Github repository or via this [link](https://excervantes.github.io/cinema-quiz/) or clone the code from the repository. 
+You can either just go to the website from the Github repository or via this [link](https://excervantes.github.io/cinema-quiz/) or clone the code from the repository.  
 
 ## Usage
 
