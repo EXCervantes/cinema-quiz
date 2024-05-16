@@ -14,14 +14,17 @@
                         backdrop: '#E97777',
                         popcorn: '#FCDDB0',
                         boxborderbutton: '#C0C1C1',
-                        darkbackdrop: '#7E1616',
                         text: '#FDFCFA',
                         litpopcorn: '#FFFAD7',
-                        submitgreen: '#39d353'
-                        // litpopcorn: '#FFFEAD',
+                        submitgreen: '#39d353',
                     }
                 }
             }
+        }
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
         }
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
@@ -30,59 +33,64 @@
 </head>
 
 <body>
-    <div class="bg-boxborderbutton">
-        <div class="p-6">
+    <div class="bg-boxborderbutton dark:bg-gray-600">
+        <div class="text-right p-2 mr-8">
+            <button id="theme-toggle" type="button"
+                class="text-black dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+                <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                        fill-rule="evenodd" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="p-8">
             <div
-                class="flex justify-center bg-backdrop border-solid border-2 border-black container rounded-lg shadow mx-auto min-w-25 pt-2 p-2">
-                <h1 class="table items-center text-6xl font-bold dark:text-white">Cinema<span
-                        class="bg-yellow-100 text-backdrop text-4xl font-semibold me-2 px-2.5 py-0.75 rounded dark:bg-blue-200 dark:text-blue-800 ms-2">QUIZ</span>
+                class="flex justify-center bg-backdrop dark:bg-gray-900 border-solid border-2 border-black container rounded-lg shadow mx-auto min-w-25 pt-2 p-2">
+                <h1 class="table items-center text-8xl pb-3.5 font-bold dark:text-white" id="cinema">Cinema<span
+                        class="bg-yellow-100 text-backdrop text-6xl font-semibold me-2 px-2.5 py-0.75 rounded dark:bg-blue-200 dark:text-blue-800 ms-2">QUIZ</span>
                 </h1>
             </div>
         </div>
         <div class="min-h-4 sm:flex sm:items-center sm:justify-around p-6">
-            <div class="bg-backdrop border-solid border-2 border-black min-h-4 container rounded-lg shadow mx-auto max-width"
+            <div class="bg-backdrop border-solid border-2 border-black min-h-4 container rounded-lg shadow dark:bg-gray-900 mx-auto max-width"
                 id="quiz-question-container">
                 <main>
                     <div class="p-4">
                         <h2 class="text-4xl font-extrabold dark:text-white">Quiz Question</h2>
                     </div>
                     <div class="quiz-question-card">
-                        <div class="p-3 pb-2 flex justify-center text-4xl question">
+                        <div class="p-3 pb-2 flex justify-center text-4xl dark:text-white question">
                         </div>
                         <div class="flex flex-wrap justify-center p-2">
                             <div class="grid grid-cols-2 gap-6">
-                                <div class="answer-one">
+                                <div class="answer-one dark:text-grey-800">
                                     <p>Answer 1</p>
                                 </div>
-                                <div class="answer-two">
+                                <div class=" answer-two dark:text-grey-800">
                                     <p>Answer 2</p>
                                 </div>
-                                <div class="answer-three">
+                                <div class="answer-three dark:text-grey-800">
                                     <p>Answer 3</p>
                                 </div>
-                                <div class="answer-four">
+                                <div class="answer-four dark:text-grey-800">
                                     <p>Answer 4</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="p-4 text-4xl font-bold score-card">
+                    <div class="p-4 text-4xl font-bold score-card dark:text-white">
                         <h2>Score</h2>
                     </div>
                     <div id="quiz-bttn-row" class="p-4 flex flex-wrap justify-around">
-                        <!-- <div class=" prev-bttn"><button type="button"
-                        class="focus:outline-none text-black bg-litpopcorn hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
-                        Previous Question</button></div> -->
-                        <!-- <div class="submit-bttn"><button type="button"
-                                class="focus:outline-none text-black bg-submitgreen hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                Submit Answer ✅</button>
-                        </div> -->
-                        <!-- <div class="next-bttn"><button type="button"
-                            class="focus:outline-none text-black bg-litpopcorn hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
-                            Next Question</button></div> -->
                         <div class="hint-bttn">
                             <button
-                                class="text-black bg-submitgreen hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                                class="text-black bg-submitgreen hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-semibold rounded-lg text-large px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:text-gray-200 focus:outline-none dark:focus:ring-blue-800"
                                 type="button" data-drawer-target="drawer-right-example"
                                 data-drawer-show="drawer-right-example" data-drawer-placement="right"
                                 aria-controls="drawer-right-example">
@@ -127,7 +135,7 @@
             class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-backdrop w-2/5 dark:bg-gray-800"
             tabindex="-1" aria-labelledby="drawer-right-label">
             <h3 id="drawer-right-label"
-                class="inline-flex items-center mb-4 text-4xl font-semibold font-semibold text-text dark:text-gray-400">
+                class="inline-flex items-center mb-4 text-4xl font-semibold font-semibold text-text dark:text-gray-200">
                 <svg class="w-4 h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                     viewBox="0 0 20 20">
                     <path
@@ -144,19 +152,54 @@
                 <span class="sr-only">Close menu</span>
             </button>
             <form id="movieSearchForm">
-                <label class="text-3xl pb-4 font-bold" for="movieSearch">Search for your movie:</label>
+                <label class="text-3xl pb-4 font-bold dark:text-white" for="movieSearch">Search for your movie:</label>
                 <input type="text" id="movieSearch" name="movieSearch" placeholder="Movie Name">
                 <div class="pt-4 text-center">
                     <button type="submit" id="submit"
-                        class="movieSearchBtn text-black border-black border-solid border-2 bg-boxborderbutton hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        class="movieSearchBtn text-black border-black border-solid border-2 bg-boxborderbutton hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:text-gray-200 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Search</button>
                 </div>
             </form>
-            <h4 id="movieTitle" class="mb-6 text-sm text-text dark:text-gray-400"></h4>
-            <p class="mb-6 text-sm text-text dark:text-gray-400" id="hintLocation"></p>
+            <h4 id="movieTitle" class="mb-6 text-sm text-text dark:text-gray-200"></h4>
+            <p class="mb-6 text-base font-semibold text-text dark:text-gray-200" id="hintLocation"></p>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
         <script src="./assets/js/script.js"></script>
+        <script>
+            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                themeToggleLightIcon.classList.remove('hidden');
+            } else {
+                themeToggleDarkIcon.classList.remove('hidden');
+            }
+
+            const themeToggleBtn = document.getElementById('theme-toggle');
+
+            themeToggleBtn.addEventListener('click', function () {
+
+                themeToggleDarkIcon.classList.toggle('hidden');
+                themeToggleLightIcon.classList.toggle('hidden');
+                if (localStorage.getItem('color-theme')) {
+                    if (localStorage.getItem('color-theme') === 'light') {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    }
+                } else {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    }
+                }
+
+            });</script>
     </div>
 </body>
 </div>
