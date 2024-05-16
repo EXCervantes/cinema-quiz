@@ -111,6 +111,7 @@ function renderQuetions(questionArray) {
 }
 
 const scoreDisplay = document.querySelector('.score-card');
+
 //Updates score on page
 function updateScore() {
     scoreDisplay.textContent = `Score: ${score}/10`;
@@ -118,19 +119,6 @@ function updateScore() {
 
 const modal = document.getElementById("quizEndModal");
 const modalContent = document.querySelector(".modal-content");
-/*
-const closeModalBtn = document.querySelector(".closeModal");
-
-closeModalBtn.onclick = function() {
-    modal.style.display = "none";
-  }
-
-const pageReloadBtn = document.querySelector(".pageReload");
-pageReloadBtn.addEventListener('click', function() {
-    location.reload();
-});
-*/
-
 
 document.addEventListener('DOMContentLoaded', async function() {
     score = 0;
@@ -182,7 +170,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
             quizIndex++;
             renderQuetions(questionArray);
-            
         }
     });
 
