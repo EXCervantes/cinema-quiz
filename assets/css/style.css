@@ -8,22 +8,16 @@
 
 .quizBtn{
     border: 2px solid black;
-    background-color: rgb(224, 224, 224);
+    background-color: #C0C1C1;
     margin-top: 5px;
-    padding: 2px;
+    padding: 4px;
+    border-radius: 8px 8px 8px 8px;
+    font-size: 30px;
+    font-weight: 500;
+
 }
 
-.left-header{
-    max-width: 30%;
-}
-
-main{
-    min-width: 60%;
-}
-
-.main-body-red{
-    min-height: 70vh;
-}
-.main-body{
-    min-height: 65vh;
+.quizBtn:hover {
+    box-shadow: 3px 3px 3px #aaaaaa;
+    transform: scale(1.1); 
 }
