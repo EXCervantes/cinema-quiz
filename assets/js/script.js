@@ -70,7 +70,7 @@ async function triviaCall(amount, category) {
 
         questionArray.push(individQuestion);
     }
-    console.log(questionArray);
+    console.log(questionArray); //Log questions, incorrect answers and correct answer
     return questionArray;
 
 }
@@ -83,6 +83,7 @@ const answerThree = document.querySelector('.answer-three')
 const answerFour = document.querySelector('.answer-four')
 
 let score = 0;
+let highScore = localStorage.getItem('highScore') || 0;
 let quizIndex = 0;
 
 // Renders quiz question on page
@@ -115,6 +116,22 @@ function updateScore() {
     scoreDisplay.textContent = `Score: ${score}/10`;
 }
 
+const modal = document.getElementById("quizEndModal");
+const modalContent = document.querySelector(".modal-content");
+/*
+const closeModalBtn = document.querySelector(".closeModal");
+
+closeModalBtn.onclick = function() {
+    modal.style.display = "none";
+  }
+
+const pageReloadBtn = document.querySelector(".pageReload");
+pageReloadBtn.addEventListener('click', function() {
+    location.reload();
+});
+*/
+
+
 document.addEventListener('DOMContentLoaded', async function() {
     score = 0;
     quizIndex = 0;
@@ -132,8 +149,16 @@ document.addEventListener('DOMContentLoaded', async function() {
             if (quizIndex === 9) {
                 score++;
                 updateScore();
-                window.alert(`Quiz complete. Score: ${score}/10
-Reload page to take another quiz.`);
+                if (highScore < score) {
+                    highScore = score;
+                    localStorage.setItem('highScore', highScore);
+                }
+                modalContent.innerHTML = `
+                <p>Quiz complete. Score: ${score}/10</p>
+                <p>High Score: ${localStorage.getItem('highScore')}</p>
+                <br>
+                <p>Reload page to take another quiz.</p>`
+                modal.style.display = "block";
                 return;
             }
             score++;
@@ -143,8 +168,16 @@ Reload page to take another quiz.`);
             
         } else if (target.classList.contains('incorrectAns')) {
             if (quizIndex === 9) {
-                window.alert(`Quiz complete. Score: ${score}/10
-Reload page to take another quiz.`);
+                if (highScore < score) {
+                    highScore = score;
+                    localStorage.setItem('highScore', highScore);
+                }
+                modalContent.innerHTML = `
+                <p>Quiz complete. Score: ${score}/10</p>
+                <p>High Score: ${localStorage.getItem('highScore')}</p>
+                <br>
+                <p>Reload page to take another quiz.</p>`
+                modal.style.display = "block";
                 return;
             }
             quizIndex++;

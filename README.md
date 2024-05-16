@@ -1,4 +1,5 @@
-# cinema-quiz
+# Cinema-quiz
+
 ## Description
 
 Help people increase their movie knownledge by taking a fun quiz.
