@@ -2,31 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Monoton&family=Racing+Sans+One&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
-
 * {
     font-family: 'Courier New', Courier, monospace;
-}
-
-#cinema {
-    font-family: "Monoton", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-#quiz-question {
-    font-family: "Racing Sans One", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.question {
-    font-family: "Racing Sans One", sans-serif;
-    font-weight: 400;
-    font-style: normal;
 }
 
 .quizBtn{
