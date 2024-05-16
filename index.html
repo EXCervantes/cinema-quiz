@@ -127,7 +127,7 @@
             class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-backdrop w-2/5 dark:bg-gray-800"
             tabindex="-1" aria-labelledby="drawer-right-label">
             <h3 id="drawer-right-label"
-                class="inline-flex items-center mb-4 text-4xl font-semibold font-semibold text-white dark:text-gray-400">
+                class="inline-flex items-center mb-4 text-4xl font-semibold font-semibold text-text dark:text-gray-400">
                 <svg class="w-4 h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                     viewBox="0 0 20 20">
                     <path
@@ -144,14 +144,16 @@
                 <span class="sr-only">Close menu</span>
             </button>
             <form id="movieSearchForm">
-                <label class="text-3xl font-bold" for="movieSearch">Search for your movie:</label>
-                <input type="text" id="movieSearch" name="movieSearch" placeholder="Cool Movie Name">
-
-                <input type="submit" value="Search" id="submit" class="movieSearchBtn">
+                <label class="text-3xl pb-4 font-bold" for="movieSearch">Search for your movie:</label>
+                <input type="text" id="movieSearch" name="movieSearch" placeholder="Movie Name">
+                <div class="pt-4 text-center">
+                    <button type="submit" id="submit"
+                        class="movieSearchBtn text-black border-black border-solid border-2 bg-boxborderbutton hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Search</button>
+                </div>
             </form>
-            <h4 id="movieTitle" class="mb-6 text-sm text-black dark:text-gray-400">Movie Title</h4>
-            <p class="mb-6 text-sm text-black dark:text-gray-400" id="hintLocation"> Movie Description and
-                Information</p>
+            <h4 id="movieTitle" class="mb-6 text-sm text-text dark:text-gray-400"></h4>
+            <p class="mb-6 text-sm text-text dark:text-gray-400" id="hintLocation"></p>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
         <script src="./assets/js/script.js"></script>
