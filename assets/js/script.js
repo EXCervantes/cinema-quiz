@@ -17,7 +17,7 @@ async function omdbCall(title, key) {
     let plot = data.Plot;
     let release = data.Released;
     let director = data.Director;
-    hintArray.push(actors,plot,release,director);
+    hintArray.push(actors, plot, release, director);
     return hintArray;
 
 }
@@ -81,6 +81,7 @@ const answerOne = document.querySelector('.answer-one')
 const answerTwo = document.querySelector('.answer-two')
 const answerThree = document.querySelector('.answer-three')
 const answerFour = document.querySelector('.answer-four')
+const correctAnswer = document.querySelector('#correct-answer')
 
 let score = 0;
 let highScore = localStorage.getItem('highScore') || 0;
@@ -112,15 +113,26 @@ function renderQuetions(questionArray) {
 
 const scoreDisplay = document.querySelector('.score-card');
 
-//Updates score on page
+// Updates score on page
 function updateScore() {
     scoreDisplay.textContent = `Score: ${score}/10`;
+}
+
+// Display Correct Answer
+
+function displayCorrectAnswer(questionArray, userWasCorrect) {
+    if (userWasCorrect) {
+        correctAnswer.innerHTML = "Correct! The answer was " + questionArray[quizIndex].correct
+    }
+    else {
+        correctAnswer.innerHTML = "Sorry, the correct answer was " + questionArray[quizIndex].correct + "."
+    }
 }
 
 const modal = document.getElementById("quizEndModal");
 const modalContent = document.querySelector(".modal-content");
 
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', async function () {
     score = 0;
     quizIndex = 0;
 
@@ -128,15 +140,16 @@ document.addEventListener('DOMContentLoaded', async function() {
     const category = '11';
     let questionArray = await triviaCall(amount, category);
     renderQuetions(questionArray);
-    updateScore();  
+    updateScore();
 
     //Handle clicking on answers and end of quiz
-    document.addEventListener('click', async function(event) {
+    document.addEventListener('click', async function (event) {
         const target = event.target;
         if (target.classList.contains('correctAns')) {
             if (quizIndex === 9) {
                 score++;
                 updateScore();
+                displayCorrectAnswer(questionArray, true);
                 if (highScore < score) {
                     highScore = score;
                     localStorage.setItem('highScore', highScore);
@@ -150,12 +163,14 @@ document.addEventListener('DOMContentLoaded', async function() {
                 return;
             }
             score++;
+            displayCorrectAnswer(questionArray, true);
             quizIndex++;
             updateScore();
             renderQuetions(questionArray);
-            
+
         } else if (target.classList.contains('incorrectAns')) {
             if (quizIndex === 9) {
+                displayCorrectAnswer(questionArray, false);
                 if (highScore < score) {
                     highScore = score;
                     localStorage.setItem('highScore', highScore);
@@ -168,6 +183,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 modal.style.display = "block";
                 return;
             }
+            displayCorrectAnswer(questionArray, false);
             quizIndex++;
             renderQuetions(questionArray);
         }
